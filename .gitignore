@@ -1,0 +1,54 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# VS Code settings
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Environment files
+.env
+.venv/
+env/
+venv/
+
+# Pytest cache
+.pytest_cache/
+
+# Log files
+*.log
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+
+# MyPy cache
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pylint
+pylint-report.txt
+
+# Temporary files
+*.bak
+*.tmp
+*.swp
+
+# Ignore secrets
+secrets.yaml
+
+# Ignore model files
+model/qwen1_5-1_8b-chat-q4_k_m.gguf

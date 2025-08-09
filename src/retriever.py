@@ -62,7 +62,7 @@ class DocumentRetriever:
             self.vectorizer = None
             self.tfidf_matrix = None
 
-    def retrieve_chunks(self, query: str, top_k: int = 3) -> List[str]:
+    def retrieve_chunks(self, query: str, top_k: int = 10) -> List[str]:
         """
         Mengambil potongan dokumen (chunks) yang paling relevan terhadap query yang diberikan
         menggunakan cosine similarity terhadap representasi TF-IDF.
@@ -102,7 +102,7 @@ if __name__ == "__main__":
     print(retriever)
     
     test_query = "Bagaimana cara membuang sachet kopi?"
-    relevant_docs = retriever.retrieve_chunks(test_query, top_k=3)
+    relevant_docs = retriever.retrieve_chunks(test_query, top_k=10)
     
     print("\n--- Hasil Retrieval (TF-IDF Baseline) ---")
     print(f"Query: {test_query}")

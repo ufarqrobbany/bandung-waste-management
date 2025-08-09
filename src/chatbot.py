@@ -2,7 +2,6 @@ import argparse
 import logging
 from retriever import DocumentRetriever
 from generator import LLMGenerator
-import os
 
 # Konfigurasi logging untuk menampilkan log pada terminal
 # Format log: timestamp - level - pesan

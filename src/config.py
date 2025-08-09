@@ -11,6 +11,7 @@ class AppConfig:
     # LLM Parameters
     LLM_MODEL = os.getenv("LLM_MODEL", "llama3-8b-8192")
     LLM_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", 0.7))
+    # LLM_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", 0))
     LLM_MAX_TOKENS = int(os.getenv("LLM_MAX_TOKENS", 1024))
 
     # Prompting

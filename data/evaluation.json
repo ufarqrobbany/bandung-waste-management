@@ -1,0 +1,502 @@
+[
+  {
+    "id": 1,
+    "question": "Apakah saya boleh membuang botol plastik bekas kemasan oli ke tempat sampah biasa?",
+    "ground_truth": "Tidak. Bekas kemasan oli termasuk dalam kategori limbah bahan berbahaya dan beracun (Limbah B3) yang memerlukan pengelolaan khusus. Anda harus memilahnya dari sampah rumah tangga biasa dan menyimpannya di wadah yang sesuai, lalu menyerahkannya ke fasilitas pengelolaan yang berizin."
+  },
+  {
+    "id": 2,
+    "question": "Jika saya memiliki botol kaca bekas, apakah harus dibuang ke tempat daur ulang atau tempat sampah biasa?",
+    "ground_truth": "Botol kaca bekas sebaiknya dibuang ke tempat daur ulang. Sebagai bagian dari pengelolaan sampah, Anda dapat memanfaatkannya kembali atau menyetorkannya ke fasilitas daur ulang. Hal ini diatur dalam Pasal 14 Peraturan Menteri LHK Nomor 14 Tahun 2021 tentang Pengelolaan Sampah pada Bank Sampah."
+  },
+  {
+    "id": 3,
+    "question": "Bagaimana cara membuang baterai bekas dari remote control atau jam dinding?",
+    "ground_truth": "Baterai bekas termasuk dalam kategori limbah B3 dan harus dipilah. Anda tidak boleh mencampurnya dengan sampah rumah tangga biasa. Baterai bekas harus dikumpulkan di fasilitas pengelolaan sampah spesifik (FPSS) atau tempat penampungan sementara sampah spesifik B3 (TPSSS-B3). Wadah untuk menampungnya harus diberi warna hitam. Hal ini diatur dalam Pasal 10 dan Pasal 11 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 4,
+    "question": "Apakah sisa makanan dan daun-daun kering di halaman rumah bisa langsung dicampur dengan sampah plastik?",
+    "ground_truth": "Tidak. Sisa makanan dan daun kering adalah sampah organik yang mudah terurai dan dapat diolah menjadi kompos. Anda harus memisahkannya dari sampah anorganik seperti plastik agar bisa diolah secara optimal. Pemilahan sampah berdasarkan jenis ini merupakan bagian dari penanganan sampah. Hal ini diatur dalam Pasal 15 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 5,
+    "question": "Apa yang harus saya lakukan dengan kemasan produk berbahan plastik saset yang sulit terurai?",
+    "ground_truth": "Produsen memiliki kewajiban untuk mengurangi sampah dari kemasan yang sulit terurai, dan Anda dapat menyetorkan sampah tersebut ke fasilitas penampungan yang disediakan oleh produsen, bank sampah, atau pusat daur ulang. Hal ini diatur dalam Pasal 7 Permen LHK P.75/MENLHK/SETJEN/KUM.1/10/2019."
+  },
+  {
+    "id": 6,
+    "question": "Apa sanksi bagi individu yang sengaja membuang sampah sembarangan dan menyebabkan lingkungan rusak?",
+    "ground_truth": "Sanksi bisa berupa denda dalam bentuk uang/barang/jasa. Sanksi ini dapat diberikan oleh pemerintah daerah kepada individu yang melanggar larangan pengelolaan sampah. Hal ini diatur dalam Pasal 23 Permen LHK No 33 Tahun 2010."
+  },
+  {
+    "id": 7,
+    "question": "Apakah saya boleh membakar sampah di halaman rumah untuk mengurangi volume?",
+    "ground_truth": "Tidak. Setiap orang dilarang membakar sampah yang tidak sesuai persyaratan teknis. Pembakaran terbuka dapat menyebabkan pencemaran udara. Hal ini diatur dalam Pasal 29 Undang-Undang Nomor 18 Tahun 2008 dan Pasal 69 ayat (1) huruf h Undang-Undang Nomor 32 Tahun 2009."
+  },
+  {
+    "id": 8,
+    "question": "Bagaimana cara saya tahu apakah sebuah produk kemasan ramah lingkungan?",
+    "ground_truth": "Produk atau kemasan yang ramah lingkungan biasanya memiliki label yang menunjukkan bahwa ia dapat dikomposkan, didaur ulang, dan/atau diguna ulang. Produsen memiliki kewajiban untuk mencantumkan label ini pada produknya. Hal ini diatur dalam Pasal 10 Permen LHK P.75/MENLHK/SETJEN/KUM.1/10/2019."
+  },
+  {
+    "id": 9,
+    "question": "Apakah saya bisa mendapatkan uang dari sampah yang saya kumpulkan di rumah?",
+    "ground_truth": "Ya. Anda bisa menabung sampah terpilah di bank sampah. Sampah yang memiliki nilai ekonomi akan ditimbang dan dihargai. Uang hasil tabungan tersebut dapat dicatat dalam buku rekening. Hal ini diatur dalam Pasal 15 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 10,
+    "question": "Apa yang harus saya lakukan jika menemukan bangkai binatang di area perumahan pasca bencana?",
+    "ground_truth": "Bangkai binatang yang timbul akibat bencana harus segera ditangani dengan cara penguburan atau pembakaran sesuai dengan ketentuan peraturan perundang-undangan. Hal ini diatur dalam Pasal 7 Permen LHK Nomor 1 Tahun 2024."
+  },
+  {
+    "id": 11,
+    "question": "Apakah saya boleh mencampur sampah elektronik yang rusak dengan sampah dapur?",
+    "ground_truth": "Tidak. Sampah elektronik yang sudah rusak termasuk dalam kategori limbah B3. Sampah ini harus dipisahkan dari sampah rumah tangga lain karena mengandung zat berbahaya yang dapat mencemari lingkungan. Pemilahan ini harus dilakukan di sumbernya. Hal ini diatur dalam Pasal 10 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 12,
+    "question": "Jika saya memiliki botol plastik bekas yang masih ada labelnya, apakah boleh langsung dibuang ke tempat daur ulang?",
+    "ground_truth": "Untuk memaksimalkan daur ulang, sebaiknya Anda memisahkan botol plastik dari labelnya terlebih dahulu, lalu meremasnya agar volume berkurang. Setelah itu, buanglah ke fasilitas penampungan sampah terpilah. Hal ini diatur dalam Lampiran III Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 13,
+    "question": "Saya punya obat-obatan kadaluarsa. Ke mana saya harus membuangnya?",
+    "ground_truth": "Obat-obatan kadaluarsa termasuk dalam kategori limbah B3. Anda tidak boleh membuangnya ke tempat sampah biasa. Sampah jenis ini harus dikumpulkan secara terpisah di wadah khusus berwarna cokelat dan diserahkan ke fasilitas pengelolaan limbah B3 yang berizin. Hal ini diatur dalam Pasal 11 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 14,
+    "question": "Apa saja kewajiban saya sebagai warga negara dalam pengelolaan sampah?",
+    "ground_truth": "Anda berkewajiban untuk menjaga kebersihan lingkungan, berperan aktif dalam kegiatan pengurangan dan penanganan sampah, serta dapat memberikan saran, usul, dan pendapat dalam upaya peningkatan pengelolaan sampah di wilayah Anda. Hal ini diatur dalam Pasal 34 Permen LHK No 33 Tahun 2010."
+  },
+  {
+    "id": 15,
+    "question": "Apakah pengelola kawasan perumahan bertanggung jawab untuk menyediakan tempat sampah?",
+    "ground_truth": "Ya. Pengelola kawasan permukiman wajib menyediakan tempat sampah rumah tangga dan alat angkut dari sumber sampah ke tempat penampungan sementara (TPS) atau tempat pengolahan sampah terpadu (TPST). Hal ini diatur dalam Pasal 16 Permen LHK No 33 Tahun 2010."
+  },
+  {
+    "id": 16,
+    "question": "Jika suatu TPA menimbulkan bau tidak sedap dan mengganggu warga, apa yang bisa dilakukan?",
+    "ground_truth": "Pemerintah daerah bertanggung jawab memberikan kompensasi kepada masyarakat yang terkena dampak negatif dari TPA. Bentuk kompensasi dapat berupa biaya kesehatan, pemulihan lingkungan, atau relokasi. Hal ini diatur dalam Pasal 31 Permen LHK No 33 Tahun 2010."
+  },
+  {
+    "id": 17,
+    "question": "Apa yang dimaksud dengan 'ekonomi sirkular' dalam pengelolaan sampah?",
+    "ground_truth": "Ekonomi sirkular adalah pendekatan yang memanfaatkan sampah untuk digunakan kembali sebagai bahan baku industri. Tujuannya adalah untuk mengurangi timbulan sampah dan memaksimalkan nilai ekonomi dari sampah. Hal ini menjadi salah satu tujuan pembentukan bank sampah. Hal ini diatur dalam Pasal 1 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 18,
+    "question": "Bagaimana cara membuang bekas kemasan hair spray?",
+    "ground_truth": "Bekas kemasan hair spray termasuk dalam kategori limbah B3. Anda harus memilahnya dari sampah rumah tangga biasa dan menyimpannya di wadah khusus berwarna oranye. Wadah tersebut harus dilengkapi penutup dan kedap air, serta diserahkan ke fasilitas pengelolaan limbah B3 yang berizin. Hal ini diatur dalam Pasal 11 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 19,
+    "question": "Apakah saya boleh membuang puing-puing bangunan ke tempat pembuangan sampah umum?",
+    "ground_truth": "Tidak. Puing bongkaran bangunan termasuk dalam kategori sampah spesifik yang memerlukan penanganan khusus. Penanganannya dilakukan melalui pemilahan, pengumpulan, pengangkutan, pengolahan, dan/atau pemrosesan akhir. Hal ini diatur dalam Pasal 2 ayat (1) dan Pasal 33 PP Nomor 27 Tahun 2020."
+  },
+  {
+    "id": 20,
+    "question": "Jika TPA sudah tidak mampu menampung sampah, apa yang harus dilakukan pemerintah?",
+    "ground_truth": "Pemerintah kabupaten/kota wajib melakukan penutupan atau rehabilitasi TPA. Penutupan TPA dapat dilakukan jika sudah penuh, tidak sesuai dengan tata ruang wilayah, atau dioperasikan dengan cara penimbunan terbuka. Hal ini diatur dalam Pasal 61 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 21,
+    "question": "Bagaimana cara mengelola sampah organik seperti sisa makanan di rumah?",
+    "ground_truth": "Sampah organik dapat diolah menjadi kompos melalui pengomposan. Proses ini mengubah sampah organik menjadi pupuk yang memiliki nilai ekonomi. Anda bisa menyetorkan sampah organik ke bank sampah atau mengolahnya sendiri di rumah. Hal ini diatur dalam Pasal 9 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 22,
+    "question": "Apakah botol plastik bekas minuman bisa digunakan kembali?",
+    "ground_truth": "Ya. Botol plastik bekas termasuk dalam kategori sampah yang dapat diguna ulang. Anda dapat memanfaatkannya kembali untuk fungsi yang sama atau berbeda, misalnya sebagai pot tanaman, tanpa melalui proses pengolahan terlebih dahulu. Hal ini diatur dalam Pasal 5 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 23,
+    "question": "Apa yang harus saya lakukan jika menemukan sampah berbahan kimia berbahaya dari rumah tangga yang dibuang sembarangan?",
+    "ground_truth": "Anda harus segera melaporkannya kepada pemerintah daerah atau instansi terkait. Sampah tersebut harus dikelola secara khusus karena dapat mencemari dan/atau merusak lingkungan hidup, serta membahayakan kesehatan manusia. Hal ini diatur dalam Pasal 3 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 24,
+    "question": "Bagaimana cara membuang sampah dari kegiatan massal seperti festival atau konser?",
+    "ground_truth": "Sampah dari kegiatan massal termasuk sampah spesifik yang timbul secara tidak periodik dan memerlukan penanganan khusus. Penyelenggara kegiatan wajib menyusun rencana pengelolaan sampah dan mendapatkan persetujuan dari pemerintah daerah. Penanganannya meliputi pemilahan, pengumpulan, pengangkutan, pengolahan, dan/atau pemrosesan akhir. Hal ini diatur dalam Pasal 42 dan Pasal 44 PP Nomor 27 Tahun 2020."
+  },
+  {
+    "id": 25,
+    "question": "Apa saja syarat tempat penampungan sampah sementara (TPS) yang disediakan di permukiman?",
+    "ground_truth": "TPS harus memiliki luas maksimal 200 m² dan dilengkapi sarana untuk memilah sampah menjadi minimal 5 jenis. Lokasinya harus mudah diakses, tidak mencemari lingkungan, dan tidak mengganggu estetika atau lalu lintas. Hal ini diatur dalam Pasal 20 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 26,
+    "question": "Apa yang dimaksud dengan 'dana penjaminan' dalam konteks pengelolaan lingkungan hidup?",
+    "ground_truth": "Dana penjaminan adalah dana yang wajib disediakan oleh pemegang izin lingkungan untuk membiayai pemulihan fungsi lingkungan hidup jika terjadi pencemaran atau kerusakan. Dana ini disimpan di bank pemerintah yang ditunjuk. Hal ini diatur dalam Pasal 55 UU Nomor 32 Tahun 2009."
+  },
+  {
+    "id": 27,
+    "question": "Apakah pengelola bank sampah bisa mendapatkan upah?",
+    "ground_truth": "Ya. Jika pengelolaan bank sampah dijalankan dengan baik dan profesional, pengelolanya bisa mendapatkan upah. Selain itu, sistem bagi hasil yang umum digunakan adalah 85% untuk nasabah dan 15% untuk operasional bank sampah. Hal ini diatur dalam Lampiran III Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 28,
+    "question": "Apa yang menjadi tujuan utama dari pengelolaan sampah?",
+    "ground_truth": "Tujuan utama pengelolaan sampah adalah untuk meningkatkan kesehatan masyarakat dan kualitas lingkungan, serta mengubah sampah menjadi sumber daya. Hal ini diatur dalam Pasal 4 UU Nomor 18 Tahun 2008."
+  },
+  {
+    "id": 29,
+    "question": "Bagaimana cara pemerintah daerah mengawasi pengelolaan sampah oleh produsen?",
+    "ground_truth": "Menteri, gubernur, dan bupati/wali kota memiliki tugas dan wewenang untuk melakukan pengawasan dan evaluasi terhadap pengurangan sampah oleh produsen. Pengawasan ini dilakukan paling sedikit satu kali dalam satu tahun. Hal ini diatur dalam Pasal 18 Permen LHK P.75/MENLHK/SETJEN/KUM.1/10/2019."
+  },
+  {
+    "id": 30,
+    "question": "Apakah ada target nasional untuk pengurangan dan penanganan sampah?",
+    "ground_truth": "Ya. Peraturan Presiden Nomor 97 Tahun 2017 menetapkan target pengurangan sampah sebesar 30% dan penanganan sampah sebesar 70% pada tahun 2025. Peraturan ini menjadi pedoman bagi pemerintah daerah dalam menyusun kebijakan dan strategi pengelolaan sampah daerah (Jakstrada). Hal ini diatur dalam Pasal 2 Perpres Nomor 97 Tahun 2017."
+  },
+  {
+    "id": 31,
+    "question": "Apa saja jenis sampah yang dapat didaur ulang di bank sampah?",
+    "ground_truth": "Bank sampah dapat menerima sampah yang dapat didaur ulang seperti plastik, kertas, logam, kaca, karet, dan tekstil. Sampah-sampah ini memiliki nilai guna setelah melalui proses pengolahan lebih lanjut. Hal ini diatur dalam Pasal 6 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 32,
+    "question": "Bagaimana cara menentukan apakah suatu limbah termasuk kategori berbahaya (B3)?",
+    "ground_truth": "Limbah ditetapkan sebagai B3 jika memiliki karakteristik mudah meledak, mudah menyala, reaktif, infeksius, korosif, dan/atau beracun. Hal ini diatur dalam Pasal 5 PP Nomor 101 Tahun 2014."
+  },
+  {
+    "id": 33,
+    "question": "Apa saja kewajiban produsen terhadap sampah kemasan produknya?",
+    "ground_truth": "Produsen wajib mengelola kemasan dan/atau barang yang diproduksinya yang tidak dapat atau sulit terurai oleh proses alam. Mereka juga harus mencantumkan label yang berhubungan dengan pengurangan dan penanganan sampah. Hal ini diatur dalam Pasal 14 dan Pasal 15 UU Nomor 18 Tahun 2008."
+  },
+  {
+    "id": 34,
+    "question": "Jika suatu perusahaan mencemari lingkungan, apakah masyarakat boleh mengajukan gugatan?",
+    "ground_truth": "Ya. Organisasi lingkungan hidup yang berbadan hukum, memiliki tujuan pelestarian lingkungan, dan telah aktif selama minimal dua tahun, berhak mengajukan gugatan untuk kepentingan lingkungan. Masyarakat yang dirugikan juga bisa mengajukan gugatan perwakilan kelompok. Hal ini diatur dalam Pasal 91 dan Pasal 92 UU Nomor 32 Tahun 2009."
+  },
+  {
+    "id": 35,
+    "question": "Bagaimana saya membuang bekas kaleng cat atau thinner?",
+    "ground_truth": "Bekas kaleng cat atau thinner termasuk limbah B3. Anda tidak boleh membuangnya ke tempat sampah biasa atau mencampurnya dengan sampah lain. Wadah tersebut harus dipilah dan dikumpulkan di tempat penampungan sementara yang berizin. Hal ini diatur dalam Pasal 10 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 36,
+    "question": "Apa yang harus dilakukan jika saya melihat ada pelanggaran dalam pengelolaan sampah di lingkungan saya?",
+    "ground_truth": "Anda dapat melaporkan pelanggaran tersebut kepada pemerintah daerah. Laporan tersebut dapat menjadi dasar bagi pemerintah daerah untuk memberikan disinsentif berupa penghentian subsidi atau denda. Hal ini diatur dalam Pasal 21 dan Pasal 23 Permen LHK No 33 Tahun 2010."
+  },
+  {
+    "id": 37,
+    "question": "Apakah tempat penampungan sementara (TPS) boleh diubah menjadi tempat pengolahan sampah terpadu (TPST)?",
+    "ground_truth": "Ya, TPS dapat diubah menjadi TPST dengan pertimbangan efektivitas dan efisiensi. TPST melakukan kegiatan pengelolaan sampah yang lebih komprehensif, mulai dari pemilahan, pengolahan, hingga pemrosesan akhir. Hal ini diatur dalam Pasal 12 Permen LHK No 33 Tahun 2010."
+  },
+  {
+    "id": 38,
+    "question": "Jika di wilayah saya belum ada bank sampah, apa yang bisa kami lakukan?",
+    "ground_truth": "Anda dapat berinisiatif untuk membentuk bank sampah bersama masyarakat. Pembentukan bank sampah dapat difasilitasi oleh pemerintah daerah dan merupakan salah satu cara untuk meningkatkan peran masyarakat dalam pengelolaan sampah. Hal ini diatur dalam Pasal 14 Permen LHK No 33 Tahun 2010 dan Pasal 2 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 39,
+    "question": "Apa yang harus dilakukan oleh pemerintah daerah jika terjadi bencana untuk menangani sampah?",
+    "ground_truth": "Pemerintah daerah harus menyusun rencana kontingensi penanggulangan bencana yang terintegrasi dengan penanganan sampah. Penanganan sampah dilakukan setelah evakuasi korban selesai, dan harus mempertimbangkan luas wilayah, jenis sampah, serta sarana yang tersedia. Hal ini diatur dalam Pasal 4 dan Pasal 19 Permen LHK Nomor 1 Tahun 2024."
+  },
+  {
+    "id": 40,
+    "question": "Bagaimana cara membuang sisa obat nyamuk semprot?",
+    "ground_truth": "Bekas kemasan obat nyamuk semprot yang mengandung aerosol termasuk dalam limbah B3. Anda harus memilahnya dari sampah rumah tangga lain. Wadah ini harus dikumpulkan di wadah berwarna oranye yang tertutup dan kedap air, kemudian diserahkan ke fasilitas pengelolaan yang berizin. Hal ini diatur dalam Pasal 11 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 41,
+    "question": "Apa saja hal yang harus dipantau oleh pengelola bank sampah?",
+    "ground_truth": "Pengelola bank sampah harus memantau struktur kelembagaan, kondisi fasilitas, kinerja pengelolaan sampah, dan pelaksanaan kemitraan. Hasil pemantauan ini dilaporkan kepada pemerintah atau pemerintah daerah yang bermitra paling sedikit satu kali dalam enam bulan. Hal ini diatur dalam Pasal 15 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 42,
+    "question": "Apakah suatu perusahaan yang menghasilkan limbah B3 boleh mengelolanya sendiri?",
+    "ground_truth": "Jika perusahaan tidak mampu mengelola limbah B3 sendiri, limbah tersebut harus diserahkan kepada pihak lain yang memiliki izin pengelolaan limbah B3. Hal ini diatur dalam Pasal 59 ayat (3) UU Nomor 32 Tahun 2009."
+  },
+  {
+    "id": 43,
+    "question": "Bagaimana cara saya membuang botol plastik yang sudah remuk?",
+    "ground_truth": "Botol plastik yang sudah remuk dan bersih dapat dikumpulkan di fasilitas bank sampah. Bank sampah akan menerima sampah tersebut dan mencatatnya sebagai tabungan Anda, karena sampah ini memiliki nilai ekonomi dan dapat didaur ulang. Hal ini diatur dalam Pasal 15 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 44,
+    "question": "Apa saja yang harus diperhatikan dalam menyusun rencana induk pengelolaan sampah di tingkat kabupaten/kota?",
+    "ground_truth": "Rencana induk harus memuat aspek teknis (pembatasan, daur ulang, pemilahan, pengangkutan, pengolahan, pemrosesan akhir), kelembagaan, pengaturan, pembiayaan, dan peran serta masyarakat. Rencana ini disusun untuk jangka waktu minimal 10 tahun dan harus disesuaikan dengan kondisi yang berkembang. Hal ini diatur dalam Pasal 5 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 45,
+    "question": "Jika saya memiliki produk elektronik yang sudah tidak terpakai, bagaimana cara membuangnya?",
+    "ground_truth": "Produk elektronik yang tidak terpakai termasuk limbah B3 dan harus dipilah. Anda harus menempatkannya di wadah khusus berwarna hitam yang disediakan oleh pengelola kawasan atau pemerintah daerah, lalu diserahkan ke fasilitas pengelolaan limbah B3 yang berizin. Hal ini diatur dalam Pasal 11 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 46,
+    "question": "Apa yang dimaksud dengan 'sampah sejenis sampah rumah tangga'?",
+    "ground_truth": "Sampah sejenis sampah rumah tangga adalah sampah yang berasal dari kawasan komersial (pusat perbelanjaan), kawasan industri, kawasan khusus, fasilitas sosial, fasilitas umum, dan/atau fasilitas lainnya, yang karakternya mirip dengan sampah rumah tangga. Hal ini diatur dalam Pasal 1 Undang-Undang Nomor 18 Tahun 2008."
+  },
+  {
+    "id": 47,
+    "question": "Siapa yang bertanggung jawab untuk mengangkut sampah dari tempat penampungan sementara (TPS) ke TPA?",
+    "ground_truth": "Pengangkutan sampah dari TPS atau TPST ke TPA menjadi tanggung jawab pemerintah daerah. Pelaksanaannya harus tetap menjamin terpisahnya sampah sesuai dengan jenisnya. Hal ini diatur dalam Pasal 7 Permen LHK No 33 Tahun 2010."
+  },
+  {
+    "id": 48,
+    "question": "Apa saja syarat yang harus dipenuhi untuk lokasi tempat pemrosesan akhir sampah (TPA)?",
+    "ground_truth": "Lokasi TPA harus memenuhi kriteria geologi, hidrogeologi, kemiringan zona, dan jarak dari permukiman (minimal 1 km) serta lapangan terbang. TPA juga tidak boleh berada di kawasan lindung atau daerah banjir. Hal ini diatur dalam Pasal 35 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 49,
+    "question": "Bagaimana cara membuang sisa deterjen atau pembersih lantai yang kadaluarsa?",
+    "ground_truth": "Produk yang mengandung bahan berbahaya dan/atau limbahnya, termasuk pembersih lantai atau deterjen, harus dibuang ke tempat penampungan sementara yang berizin. Anda harus memilahnya dari sampah rumah tangga lain karena produk tersebut dapat mencemari lingkungan. Hal ini diatur dalam Pasal 10 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 50,
+    "question": "Apakah semua jenis sampah boleh dibuang ke TPA?",
+    "ground_truth": "Tidak semua jenis sampah boleh dibuang ke TPA. Yang boleh masuk ke TPA hanya sampah rumah tangga, sampah sejenis sampah rumah tangga, dan residu. Limbah cair, limbah B3, dan limbah medis dilarang diurug di TPA. Hal ini diatur dalam Pasal 34 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 51,
+    "question": "Apa yang harus dilakukan jika saya ingin membuat bank sampah di lingkungan saya?",
+    "ground_truth": "Anda dapat membentuk bank sampah yang dikelola oleh masyarakat dan/atau pemerintah daerah. Bank sampah harus memenuhi persyaratan pengelolaan sampah, fasilitas, dan tata kelola. Tujuannya adalah untuk memilah, mengumpulkan, dan mengolah sampah dengan prinsip 3R. Hal ini diatur dalam Pasal 14 Permen LHK No 33 Tahun 2010 dan Pasal 3 Permen LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 52,
+    "question": "Bagaimana produsen dapat mengurangi volume sampah dari kemasan produknya?",
+    "ground_truth": "Produsen dapat mengurangi volume sampah dengan menyusun rencana atau program pembatasan sampah, menggunakan bahan baku yang mudah diurai atau didaur ulang, dan menarik kembali sampah dari produk dan kemasannya untuk didaur ulang. Hal ini diatur dalam Pasal 12, Pasal 13, dan Pasal 14 PP Nomor 81 Tahun 2012."
+  },
+  {
+    "id": 53,
+    "question": "Apakah saya boleh memberikan sampah yang sudah saya pilah ke pemulung?",
+    "ground_truth": "Mekanisme pengelolaan sampah secara mandiri atau melalui pihak ketiga tidak dilarang. Namun, sebaiknya sampah terpilah tersebut disalurkan melalui mekanisme resmi seperti bank sampah atau pusat daur ulang untuk memastikan pengelolaannya berjalan optimal, dan Anda dapat memperoleh nilai ekonomi dari sampah tersebut. Hal ini diatur dalam Pasal 11 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 54,
+    "question": "Bagaimana cara pemerintah daerah mengawasi kinerja bank sampah?",
+    "ground_truth": "Pemerintah daerah melakukan evaluasi kinerja bank sampah berdasarkan laporan yang disampaikan oleh pengelola. Evaluasi ini mencakup jumlah dan jenis sampah yang dikelola, kondisi fasilitas bank sampah, dan pelaksanaan tata kelola. Hasil evaluasi menjadi dasar keberlanjutan kemitraan. Hal ini diatur dalam Pasal 16 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 55,
+    "question": "Apa yang harus saya lakukan jika menemukan tumpahan bahan kimia berbahaya di tempat umum?",
+    "ground_truth": "Anda harus segera melaporkan kejadian tersebut kepada pihak berwenang, seperti pemerintah daerah. Tumpahan bahan berbahaya termasuk dalam kategori limbah B3 dan harus ditangani secara khusus oleh pihak yang memiliki izin untuk menghindari pencemaran lingkungan. Hal ini diatur dalam Pasal 3 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 56,
+    "question": "Apa yang dimaksud dengan 'sampah yang dapat dimanfaatkan kembali'?",
+    "ground_truth": "Sampah yang dapat dimanfaatkan kembali adalah sampah yang dapat digunakan ulang secara keseluruhan atau sebagian, baik untuk fungsi yang sama maupun berbeda, tanpa melalui proses pengolahan terlebih dahulu. Contohnya adalah botol minuman bekas yang digunakan kembali sebagai pot tanaman. Hal ini diatur dalam Pasal 15 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 57,
+    "question": "Apakah ada target waktu bagi produsen untuk mengurangi sampah dari kemasan produknya?",
+    "ground_truth": "Ya. Peraturan Menteri LHK menetapkan peta jalan pengurangan sampah oleh produsen dengan target pengurangan sebesar 30% pada tahun 2029. Peta jalan ini juga mengatur larangan penggunaan beberapa jenis kemasan sekali pakai pada tahun 2030, seperti saset plastik, sedotan plastik, dan kantong plastik. Hal ini diatur dalam Lampiran I Permen LHK P.75/MENLHK/SETJEN/KUM.1/10/2019."
+  },
+  {
+    "id": 58,
+    "question": "Apakah bank sampah boleh menerima sampah yang mengandung bahan berbahaya dan beracun (B3)?",
+    "ground_truth": "Ya, bank sampah dapat menerima sampah yang mengandung B3 dan/atau Limbah B3, tetapi hanya untuk tujuan pemilahan dan pengumpulan. Pengolahan sampah B3 tidak boleh dilakukan di bank sampah. Sampah ini harus dipilah dan diserahkan ke fasilitas pengelolaan sampah spesifik yang berizin. Hal ini diatur dalam Pasal 6 dan Pasal 9 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 59,
+    "question": "Bagaimana cara membuang sisa-sisa puing bangunan setelah renovasi rumah?",
+    "ground_truth": "Puing bongkaran bangunan termasuk sampah spesifik yang harus dikelola secara khusus. Anda tidak boleh membuangnya ke tempat sampah biasa. Penanganannya meliputi pemilahan, pengumpulan, pengangkutan, pengolahan, dan/atau pemrosesan akhir. Hal ini diatur dalam Pasal 2 ayat (1) PP Nomor 27 Tahun 2020."
+  },
+  {
+    "id": 60,
+    "question": "Apakah ada sanksi bagi produsen yang tidak melaksanakan kewajiban pengurangan sampah?",
+    "ground_truth": "Ya. Pemerintah, gubernur, dan bupati/wali kota berhak menerapkan sanksi kepada produsen yang tidak melakukan pengurangan sampah sesuai peraturan. Sanksi ini dilaksanakan sesuai dengan ketentuan perundang-undangan yang berlaku. Hal ini diatur dalam Pasal 21 Permen LHK P.75/MENLHK/SETJEN/KUM.1/10/2019."
+  },
+  {
+    "id": 61,
+    "question": "Apa saja yang harus saya laporkan jika terjadi keadaan darurat lingkungan di pabrik saya?",
+    "ground_truth": "Anda harus membuat laporan tertulis pendahuluan dalam waktu paling lama 1x24 jam dan laporan tertulis lengkap paling lama 5 hari kerja sejak kejadian. Laporan tersebut harus disampaikan kepada menteri, gubernur, dan bupati/walikota sesuai dengan kewenangannya. Hal ini diatur dalam Pasal 24 Permen LHK No. P.70/Menlhk/Setjen/Kum.1/8/2016."
+  },
+  {
+    "id": 62,
+    "question": "Jika saya ingin membuang kemasan bekas dari produk pembersih, bagaimana cara memilahnya?",
+    "ground_truth": "Kemasan bekas produk pembersih termasuk dalam limbah B3. Anda harus memilahnya dari sampah lain dan menempatkannya di wadah khusus berwarna oranye. Wadah ini harus kedap air dan tertutup untuk mencegah pencemaran. Hal ini diatur dalam Pasal 11 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 63,
+    "question": "Bagaimana cara membuang sampah sisa makanan agar tidak menimbulkan bau?",
+    "ground_truth": "Sampah sisa makanan adalah sampah organik yang mudah terurai dan sebaiknya dipilah dari sampah lain. Anda dapat mengolahnya menjadi kompos atau menyetorkannya ke bank sampah. Jika dibuang, pastikan wadahnya tertutup rapat untuk menghindari bau dan vektor penyakit. Hal ini diatur dalam Pasal 6 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 64,
+    "question": "Apakah boleh membuat tempat pemrosesan sampah akhir (TPA) di dekat perumahan?",
+    "ground_truth": "Tidak. Lokasi TPA harus berjarak lebih dari 1 km dari permukiman terdekat. Hal ini untuk menghindari dampak negatif seperti pencemaran lindi, bau, dan penyebaran vektor penyakit. Hal ini diatur dalam Pasal 35 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 65,
+    "question": "Apa yang dimaksud dengan 'penimbunan terbuka'?",
+    "ground_truth": "Penimbunan terbuka adalah proses penimbunan sampah di TPA tanpa melalui proses pemadatan dan penutupan secara berkala. Metode ini dilarang karena berpotensi menimbulkan masalah lingkungan. TPA yang dioperasikan dengan cara ini harus direhabilitasi atau ditutup. Hal ini diatur dalam Pasal 33 dan Pasal 61 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 66,
+    "question": "Apa yang bisa saya lakukan jika ingin berpartisipasi aktif dalam pengelolaan sampah di lingkungan saya?",
+    "ground_truth": "Anda dapat berpartisipasi dengan menjaga kebersihan lingkungan, aktif dalam kegiatan pengurangan dan penanganan sampah, serta memberikan saran, usul, pengaduan, atau pendapat dalam upaya meningkatkan pengelolaan sampah di wilayah Anda. Partisipasi ini bisa dilakukan melalui lembaga pengelola sampah di tingkat RT/RW atau bank sampah. Hal ini diatur dalam Pasal 34 Permen LHK No 33 Tahun 2010."
+  },
+  {
+    "id": 67,
+    "question": "Apa yang dimaksud dengan 'pemilahan sampah'?",
+    "ground_truth": "Pemilahan sampah adalah kegiatan mengelompokkan dan memisahkan sampah sesuai dengan jenisnya. Pemilahan ini harus dilakukan sejak dari sumbernya, yaitu di rumah tangga atau kawasan, untuk mempermudah proses pengelolaan selanjutnya. Hal ini diatur dalam Pasal 15 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 68,
+    "question": "Bagaimana cara membuang sisa oli bekas dari kendaraan bermotor?",
+    "ground_truth": "Sisa oli bekas termasuk limbah B3. Anda tidak boleh membuangnya ke saluran air atau tempat sampah biasa. Limbah tersebut harus diserahkan kepada pihak yang memiliki izin pengelolaan limbah B3. Hal ini diatur dalam Pasal 10 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 69,
+    "question": "Jika suatu TPA mengalami kebakaran, apa yang harus dilakukan?",
+    "ground_truth": "Jika terjadi kebakaran di TPA, pemadamannya dapat dilakukan dengan menggunakan air, menggali dan membongkar tumpukan sampah, serta mengatasi oksigen yang kontak langsung dengan sampah. Penanganan ini termasuk dalam prosedur tanggap darurat. Hal ini diatur dalam Pasal 53 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 70,
+    "question": "Apa saja syarat untuk mendirikan bank sampah unit (BSU)?",
+    "ground_truth": "Bank sampah unit harus memiliki struktur kelembagaan, dibentuk oleh kepala kelurahan/desa, dan cakupan pelayanannya mencakup wilayah rukun tetangga atau rukun warga. BSU juga harus memiliki prosedur operasional standar untuk pengumpulan, pemilahan, dan pencatatan sampah. Hal ini diatur dalam Pasal 12 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 71,
+    "question": "Apakah saya boleh membuang sampah yang sudah terpilah dari rumah ke bank sampah?",
+    "ground_truth": "Ya, bank sampah menerima sampah yang sudah terpilah dari sumbernya, seperti rumah tangga. Hal ini memudahkan proses pengelolaan selanjutnya di bank sampah dan juga memberikan nilai ekonomi bagi Anda. Hal ini diatur dalam Pasal 7 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 72,
+    "question": "Apa yang dimaksud dengan 'sampah yang mengandung B3'?",
+    "ground_truth": "Sampah yang mengandung B3 adalah sampah yang berasal dari rumah tangga dan kawasan yang mengandung bahan berbahaya dan beracun (B3), seperti produk rumah tangga yang mengandung B3 dan tidak digunakan lagi, bekas kemasan produk B3, atau barang elektronik yang rusak. Hal ini diatur dalam Pasal 1 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 73,
+    "question": "Bagaimana cara membuang sisa-sisa pupuk kimia atau pestisida?",
+    "ground_truth": "Bekas kemasan pupuk kimia atau pestisida termasuk limbah B3 dan harus dipilah. Anda harus menyimpannya di wadah khusus berwarna oranye, kemudian diserahkan ke fasilitas pengelolaan limbah B3 yang berizin. Hal ini diatur dalam Pasal 11 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 74,
+    "question": "Apa yang dimaksud dengan 'pemrosesan akhir sampah'?",
+    "ground_truth": "Pemrosesan akhir sampah adalah proses pengembalian sampah dan/atau residu hasil pengolahan ke media lingkungan secara aman bagi manusia dan lingkungan. Proses ini dilakukan di TPA dengan metode lahan urug terkendali atau lahan urug saniter. Hal ini diatur dalam Pasal 1 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 75,
+    "question": "Siapa yang bertanggung jawab dalam menyediakan fasilitas pengelolaan sampah di kawasan perumahan?",
+    "ground_truth": "Pengelola kawasan permukiman bertanggung jawab menyediakan fasilitas pengelolaan sampah, seperti TPS atau TPST. Mereka juga harus memastikan tersedianya sarana pemilahan dan pewadahan sampah skala kawasan. Hal ini diatur dalam Pasal 11 Permen LHK No 33 Tahun 2010."
+  },
+  {
+    "id": 76,
+    "question": "Apakah boleh membangun stasiun peralihan antara (SPA) di dekat permukiman?",
+    "ground_truth": "Tidak. Lokasi penempatan SPA harus berjarak minimal 1 km dari permukiman terdekat. Hal ini untuk mencegah dampak negatif yang mungkin timbul, seperti bau dan pencemaran. Hal ini diatur dalam Pasal 31 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 77,
+    "question": "Apa saja yang harus dilaporkan oleh pengelola bank sampah kepada pemerintah daerah?",
+    "ground_truth": "Pengelola bank sampah harus melaporkan hasil pemantauan pengelolaan sampah. Laporan ini mencakup jumlah dan jenis sampah yang dipilah dan dikumpulkan, jumlah sampah yang dimanfaatkan kembali atau didaur ulang, jumlah residu, dan waktu pengangkutan residu ke TPA. Laporan disampaikan paling sedikit 1 kali dalam 6 bulan. Hal ini diatur dalam Pasal 15 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 78,
+    "question": "Bagaimana cara menentukan apakah suatu kegiatan pengelolaan sampah di TPA layak secara ekonomi?",
+    "ground_truth": "Suatu kegiatan di TPA dinyatakan layak secara ekonomi jika manfaat ekonomi yang dihasilkan lebih besar daripada biaya yang ditimbulkan. Manfaat ini termasuk pendapatan dari material daur ulang, pemanfaatan gas bio, dan peningkatan harga tanah sekitar. Hal ini diatur dalam Pasal 9 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 79,
+    "question": "Apa yang dimaksud dengan 'sampah spesifik'?",
+    "ground_truth": "Sampah spesifik adalah sampah yang karena sifat, konsentrasi, dan/atau volumenya memerlukan pengelolaan khusus. Contohnya termasuk sampah yang mengandung bahan berbahaya dan beracun, limbah B3, sampah akibat bencana, puing bangunan, dan sampah yang secara teknologi belum dapat diolah. Hal ini diatur dalam Pasal 1 UU Nomor 18 Tahun 2008 dan Pasal 1 PP Nomor 27 Tahun 2020."
+  },
+  {
+    "id": 80,
+    "question": "Jika suatu perusahaan memiliki izin lingkungan, apa yang terjadi jika perusahaan tersebut melanggar ketentuan izinnya?",
+    "ground_truth": "Pemerintah dapat mengenakan sanksi administratif berupa teguran tertulis, paksaan pemerintah, pembekuan izin, atau pencabutan izin. Jika izin dicabut, izin usaha dan/atau kegiatan perusahaan tersebut juga akan dibatalkan. Hal ini diatur dalam Pasal 40 UU Nomor 32 Tahun 2009 dan Pasal 76 UU Nomor 32 Tahun 2009."
+  },
+  {
+    "id": 81,
+    "question": "Bagaimana cara membuang botol bekas kemasan obat?",
+    "ground_truth": "Bekas kemasan obat termasuk limbah B3. Anda harus memilahnya dari sampah rumah tangga lain. Wadah tersebut harus dikumpulkan di wadah khusus berwarna oranye yang tertutup dan kedap air, kemudian diserahkan ke fasilitas pengelolaan limbah B3 yang berizin. Hal ini diatur dalam Pasal 11 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 82,
+    "question": "Apakah saya boleh membuang sampah ke sungai atau laut?",
+    "ground_truth": "Tidak. Setiap orang dilarang membuang limbah atau bahan lain ke media lingkungan hidup, termasuk ke badan air, tanpa izin. Perbuatan ini dapat dikenai sanksi pidana dan/atau denda. Hal ini diatur dalam Pasal 60 dan Pasal 69 ayat (1) huruf d UU Nomor 32 Tahun 2009."
+  },
+  {
+    "id": 83,
+    "question": "Apa yang dimaksud dengan 'penimbunan' limbah B3?",
+    "ground_truth": "Penimbunan limbah B3 adalah kegiatan menempatkan limbah B3 pada fasilitas penimbunan dengan maksud agar tidak membahayakan kesehatan manusia dan lingkungan. Fasilitas ini harus berizin dan memiliki persyaratan teknis khusus. Hal ini diatur dalam Pasal 1 ayat (24) PP Nomor 101 Tahun 2014."
+  },
+  {
+    "id": 84,
+    "question": "Bagaimana cara penanganan sampah yang timbul akibat bencana di area pengungsian?",
+    "ground_truth": "Sampah di area pengungsian harus dipilah menjadi lima jenis, yaitu sampah yang mengandung B3/Limbah B3, sampah mudah terurai, sampah yang dapat dimanfaatkan kembali, sampah yang dapat didaur ulang, dan sampah lainnya. Pemilahan ini dilakukan di wadah atau area khusus. Hal ini diatur dalam Pasal 6 Permen LHK Nomor 1 Tahun 2024."
+  },
+  {
+    "id": 85,
+    "question": "Apa yang dimaksud dengan 'Kajian Lingkungan Hidup Strategis' (KLHS)?",
+    "ground_truth": "KLHS adalah kajian yang harus dibuat oleh pemerintah dan pemerintah daerah sebelum menyusun kebijakan, rencana, dan/atau program pembangunan. Tujuannya adalah untuk memastikan bahwa pembangunan yang direncanakan sudah mempertimbangkan daya dukung dan daya tampung lingkungan hidup. Hal ini diatur dalam Pasal 19 UU Nomor 32 Tahun 2009."
+  },
+  {
+    "id": 86,
+    "question": "Bagaimana cara membuang sisa minyak goreng bekas?",
+    "ground_truth": "Minyak goreng bekas sebaiknya tidak dibuang ke saluran air atau tanah. Minyak goreng bekas dapat diolah menjadi produk lain yang bermanfaat atau dikumpulkan oleh bank sampah atau pihak ketiga yang memiliki izin untuk pengolahan. Hal ini diatur dalam Pasal 6 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 87,
+    "question": "Apa yang dimaksud dengan 'sampah yang mudah terurai'?",
+    "ground_truth": "Sampah yang mudah terurai adalah sampah yang berasal dari tumbuhan, hewan, dan/atau bagian-bagiannya yang dapat terurai oleh makhluk hidup atau mikroorganisme, seperti sisa makanan, daun, dan ranting. Sampah ini idealnya diolah menjadi kompos. Hal ini diatur dalam Pasal 15 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 88,
+    "question": "Apakah sebuah perusahaan waralaba memiliki kewajiban dalam pengelolaan sampah?",
+    "ground_truth": "Ya. Perusahaan waralaba termasuk dalam kategori produsen. Jika usahanya wajib memiliki SPPL, penyusunan dokumen perencanaan pengelolaan sampah dapat dikoordinasikan oleh perusahaan induk. Hal ini diatur dalam Pasal 11 Permen LHK P.75/MENLHK/SETJEN/KUM.1/10/2019."
+  },
+  {
+    "id": 89,
+    "question": "Bagaimana prosedur pengangkutan sampah yang sudah terpilah?",
+    "ground_truth": "Pengangkutan sampah harus dilakukan terhadap sampah yang sudah terpilah dan tidak boleh dicampur kembali. Alat angkut yang digunakan harus disesuaikan dengan jenis sampah (basah atau kering) dan didesain untuk mencegah sampah tercecer ke lingkungan. Hal ini diatur dalam Pasal 12 Permen LHK Nomor 1 Tahun 2024 dan Pasal 22 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 90,
+    "question": "Apakah pengelola bank sampah boleh mengolah sampah B3?",
+    "ground_truth": "Tidak. Pengolahan sampah B3 dilarang untuk dilakukan di bank sampah. Bank sampah hanya dapat melakukan pemilahan dan pengumpulan sampah B3, yang kemudian harus diserahkan kepada pihak yang memiliki izin pengelolaan limbah B3. Hal ini diatur dalam Pasal 9 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 91,
+    "question": "Bagaimana cara membuang sisa-sisa cat tembok?",
+    "ground_truth": "Bekas kemasan cat tembok termasuk limbah B3. Anda harus memilahnya dari sampah rumah tangga lain. Wadah tersebut harus dikumpulkan di wadah khusus berwarna oranye yang tertutup dan kedap air, kemudian diserahkan ke fasilitas pengelolaan limbah B3 yang berizin. Hal ini diatur dalam Pasal 11 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 92,
+    "question": "Apa saja hak dan kewajiban kepala daerah terkait pengelolaan sampah?",
+    "ground_truth": "Kepala daerah memiliki hak dan kewajiban dalam menjalankan pemerintahannya, termasuk menetapkan kebijakan dan strategi pengelolaan sampah di wilayahnya, serta memfasilitasi pembentukan lembaga pengelola sampah. Kepala daerah juga bertanggung jawab dalam menyediakan TPS, TPST, dan TPA. Hal ini diatur dalam Pasal 65 UU Nomor 23 Tahun 2014 dan Pasal 14 Permen LHK No 33 Tahun 2010."
+  },
+  {
+    "id": 93,
+    "question": "Bagaimana cara penanganan sampah puing bangunan akibat bencana?",
+    "ground_truth": "Puing bongkaran bangunan termasuk sampah spesifik yang harus ditangani melalui tahapan pemilahan, pengumpulan, pengangkutan, pengolahan, dan/atau pemrosesan akhir. Penanganan ini dilakukan dengan mempertimbangkan luasan wilayah timbulan, besaran dan jenis sampah, dan kesiapan sarana. Hal ini diatur dalam Pasal 5 dan Pasal 33 PP Nomor 27 Tahun 2020."
+  },
+  {
+    "id": 94,
+    "question": "Apakah saya harus memilah sampah plastik dan sampah kertas?",
+    "ground_truth": "Ya. Pemilahan sampah adalah kewajiban setiap orang dan merupakan bagian dari penanganan sampah. Sampah harus dipisahkan berdasarkan jenisnya, seperti plastik, kertas, kaca, dan organik. Pemilahan ini memudahkan proses daur ulang dan pengolahan selanjutnya. Hal ini diatur dalam Pasal 12 UU Nomor 18 Tahun 2008 dan Pasal 15 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 95,
+    "question": "Apa yang harus dilakukan jika saya memiliki banyak botol minuman plastik?",
+    "ground_truth": "Anda dapat membawa botol-botol tersebut ke bank sampah untuk ditabung. Botol plastik dapat didaur ulang menjadi produk lain dan memiliki nilai ekonomi. Dengan menabung, Anda juga berkontribusi dalam pengurangan sampah. Hal ini diatur dalam Pasal 15 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 96,
+    "question": "Apa yang dimaksud dengan 'lindi' dalam pengelolaan sampah?",
+    "ground_truth": "Lindi adalah cairan yang timbul sebagai limbah akibat masuknya air eksternal ke dalam tumpukan sampah, melarutkan dan membilas materi terlarut, termasuk juga materi organik hasil proses dekomposisi biologis. Lindi harus diolah di instalasi pengolahan lindi sebelum dibuang ke lingkungan. Hal ini diatur dalam Pasal 1 PermenPU3 Tahun 2013 dan Pasal 49 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 97,
+    "question": "Bagaimana cara membuang bekas kemasan insektisida?",
+    "ground_truth": "Bekas kemasan insektisida termasuk dalam kategori limbah B3. Anda harus memilahnya dari sampah rumah tangga lain. Wadah tersebut harus dikumpulkan di wadah khusus berwarna oranye yang tertutup dan kedap air, kemudian diserahkan ke fasilitas pengelolaan limbah B3 yang berizin. Hal ini diatur dalam Pasal 11 Permen LHK Nomor 9 Tahun 2024."
+  },
+  {
+    "id": 98,
+    "question": "Apakah saya boleh membuang sampah ke TPA yang sudah ditutup?",
+    "ground_truth": "Tidak. TPA yang sudah ditutup atau direhabilitasi tidak boleh dioperasikan kembali untuk penimbunan sampah. Lahan bekas TPA pasca penutupan diperuntukkan sebagai ruang terbuka hijau. Hal ini diatur dalam Pasal 70 dan Pasal 71 PermenPU3 Tahun 2013."
+  },
+  {
+    "id": 99,
+    "question": "Apa saja manfaat dari pembentukan bank sampah?",
+    "ground_truth": "Manfaat pembentukan bank sampah antara lain sebagai sarana edukasi dan perubahan perilaku dalam pengelolaan sampah, serta pelaksanaan ekonomi sirkular. Bank sampah juga dapat memberikan keuntungan ekonomi bagi masyarakat yang menabung sampah terpilah. Hal ini diatur dalam Pasal 1 Peraturan Menteri LHK Nomor 14 Tahun 2021."
+  },
+  {
+    "id": 100,
+    "question": "Apa yang harus saya lakukan jika menemukan sampah elektronik yang dibuang sembarangan?",
+    "ground_truth": "Anda harus melaporkan kejadian tersebut kepada pemerintah daerah atau instansi terkait. Sampah elektronik termasuk limbah B3 yang memerlukan penanganan khusus dan tidak boleh dibuang sembarangan karena dapat mencemari lingkungan. Hal ini diatur dalam Pasal 10 Permen LHK Nomor 9 Tahun 2024."
+  }
+]

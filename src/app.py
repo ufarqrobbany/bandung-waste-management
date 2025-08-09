@@ -1,101 +1,115 @@
 import streamlit as st
-import joblib
 import logging
 import asyncio 
 from retriever import DocumentRetriever
 from generator import LLMGeneratorAsync as LLMGenerator
-from translate import Translator
 
-# -------------------------
-# Logging Configuration
-# -------------------------
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# -------------------------
-# Initialize Translators
-# -------------------------
-try:
-    translator_id_to_en = Translator(to_lang="en", from_lang="id")
-    translator_en_to_id = Translator(to_lang="id", from_lang="en")
-except Exception as e:
-    st.error(f"Gagal menginisialisasi translator: {e}. Pastikan Anda memiliki koneksi internet.")
-    translator_id_to_en = None
-    translator_en_to_id = None
+# --- KAMUS KONFIGURASI VERSI ---
+# Di sini Anda bisa mendefinisikan semua versi yang ingin diuji.
+RETRIEVER_MODES = {
+    "Baseline (TF-IDF Saja)": {
+        "use_reranker": False,
+        "top_k": 5,
+        "initial_k": 5 # Hanya butuh 5 karena tidak ada reranking
+    },
+    "Reranker (Seimbang)": {
+        "use_reranker": True,
+        "top_k": 5,
+        "initial_k": 50
+    },
+    "Reranker (Akurasi Tinggi)": {
+        "use_reranker": True,
+        "top_k": 5,
+        "initial_k": 200
+    },
+    "Reranker (Cepat)": {
+        "use_reranker": True,
+        "top_k": 3,
+        "initial_k": 20
+    }
+}
 
-# -------------------------
-# Component Loader Function
-# -------------------------
 @st.cache_resource
 def load_components():
-    """
-    Memuat komponen utama:
-    - Retriever: untuk mengambil konteks dari dokumen
-    - Generator: untuk menghasilkan jawaban
-    - Classifier: untuk klasifikasi jenis pertanyaan/sampah
-
-    Returns:
-        Tuple (retriever, generator, classifier)
-    """
-    logging.info("Memuat komponen: Retriever, Generator, dan Classifier...")
+    """Memuat komponen retriever dan generator yang akan digunakan bersama."""
+    logging.info("Memuat komponen: Retriever dan Generator...")
     try:
         retriever = DocumentRetriever(data_path="data/perda_data.pkl")
         generator = LLMGenerator()
-        classifier = joblib.load("data/classifier_model.pkl")
-        return retriever, generator, classifier
-    except FileNotFoundError as e:
-        st.error(f"Gagal memuat file: {e}. Pastikan file data/perda_data.pkl dan data/classifier_model.pkl ada.")
-        return None, None, None
+        return retriever, generator
     except Exception as e:
         st.error(f"Gagal memuat komponen: {e}")
-        return None, None, None
+        return None, None
 
-# Load komponen hanya satu kali
-retriever, generator, classifier = load_components()
+retriever, generator = load_components()
 
-# -------------------------
-# Main Chatbot Function
-# -------------------------
-# Ubah fungsi menjadi async
-async def run_chatbot_async(query):
-    """
-    Menjalankan pipeline chatbot secara asinkron.
-    """
-    if not retriever or not generator or not classifier:
-        st.error("Komponen chatbot tidak berhasil dimuat. Mohon periksa log.")
+async def run_chatbot_async(query, mode_config):
+    """Menjalankan pipeline chatbot menggunakan konfigurasi yang dipilih."""
+    if not retriever or not generator:
+        st.error("Komponen chatbot tidak berhasil dimuat.")
         return
 
     if not query:
-        st.error("Mohon masukkan pertanyaan.")
+        st.warning("Mohon masukkan pertanyaan.")
         return
 
-    st.info("Sedang memproses pertanyaan...")
+    with st.spinner("Mencari dokumen relevan dan menghasilkan jawaban..."):
+        # 1. Retrieval dengan parameter dinamis dari mode_config
+        retrieved_results = retriever.retrieve_chunks(
+            query, 
+            top_k=mode_config["top_k"],
+            initial_k=mode_config["initial_k"],
+            use_reranker=mode_config["use_reranker"]
+        )
 
-    # --- Step 1: Retrieval chunk dokumen ---
-    retrieved_chunks = retriever.retrieve_chunks(query)
+        retrieved_chunks = [result[0] for result in retrieved_results] if retrieved_results else []
 
-    # --- Step 2: Generasi jawaban ---
-    answer = await generator.generate_answer(query, retrieved_chunks)
+        # 2. Generasi jawaban
+        answer = await generator.generate_answer(query, retrieved_chunks)
 
-    # --- Output ke pengguna ---
-    st.markdown("---")
-    st.markdown(f"**Jawaban:**\n{answer}")
+        st.markdown("---")
+        st.markdown(f"**Jawaban:**\n{answer}")
 
-    # Tampilkan referensi chunk yang digunakan
-    if retrieved_chunks:
-        st.markdown("\n**Referensi Dokumen:**")
-        for i, chunk in enumerate(retrieved_chunks):
-            st.text(f"Chunk {i+1}: {chunk[:200]}...")
+        # 3. Tampilkan referensi dan skornya
+        if retrieved_results:
+            score_type = "Relevansi (Reranker)" if mode_config["use_reranker"] else "Relevansi (TF-IDF)"
+            st.markdown(f"\n**Referensi Dokumen (Metode: {score_type}):**")
+            for i, (chunk, score) in enumerate(retrieved_results):
+                with st.expander(f"Referensi {i+1} | Skor: {score:.4f}"):
+                    st.markdown(f"_{chunk}_")
 
-# -------------------------
-# Streamlit UI Layout
-# -------------------------
-st.title("Chatbot Edukasi Pengelolaan Sampah")
-st.write("Silakan ajukan pertanyaan tentang pengelolaan sampah sesuai PERDA Kota Bandung.")
 
-# Input pertanyaan dari user
+# --- UI Layout Streamlit ---
+st.title("🤖 Chatbot Edukasi Pengelolaan Sampah")
+st.write("Ajukan pertanyaan tentang pengelolaan sampah sesuai PERDA Kota Bandung.")
+
+# --- Panel Samping (Sidebar) untuk Pilihan Versi ---
+st.sidebar.title("⚙️ Pengaturan Versi")
+mode_selection = st.sidebar.selectbox(
+    "Pilih versi retriever untuk diuji:",
+    options=list(RETRIEVER_MODES.keys())
+)
+
+# Ambil konfigurasi yang dipilih
+selected_config = RETRIEVER_MODES[mode_selection]
+
+# Tampilkan detail konfigurasi yang sedang aktif di sidebar
+st.sidebar.markdown("---")
+st.sidebar.markdown(f"**Konfigurasi Aktif:**")
+st.sidebar.markdown(f"🔹 **Reranker Aktif:** `{selected_config['use_reranker']}`")
+st.sidebar.markdown(f"🔹 **Hasil Akhir (top_k):** `{selected_config['top_k']}`")
+if selected_config['use_reranker']:
+    st.sidebar.markdown(f"🔹 **Kandidat Awal (initial_k):** `{selected_config['initial_k']}`")
+st.sidebar.markdown("---")
+
+
+# Input dari pengguna
 query = st.text_input("Tulis pertanyaan Anda di sini:", key="user_query")
 
-# Tombol untuk mengirim pertanyaan ke chatbot
-if st.button("Kirim"):
-    # Jalankan fungsi asinkron di dalam event loop
-    asyncio.run(run_chatbot_async(query))
+# Tombol kirim
+if st.button("Kirim", type="primary"):
+    if query:
+        # Jalankan chatbot dengan konfigurasi yang dipilih dari sidebar
+        asyncio.run(run_chatbot_async(query, selected_config))

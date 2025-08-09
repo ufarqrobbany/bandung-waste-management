@@ -1,141 +1,154 @@
 import logging
-from llama_cpp import Llama
-import os
+from groq import Groq, AsyncGroq
+import groq
+from config import AppConfig
 
-# Konfigurasi logging global dengan format standar
+# Konfigurasi logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-class LLMGenerator:
+class LLMGeneratorSync:
     """
-    Kelas untuk menghasilkan jawaban dari pertanyaan pengguna dengan menggunakan
-    model Large Language Model (LLM) lokal melalui pustaka llama-cpp-python.
+    Kelas untuk menghasilkan jawaban menggunakan model remote (Groq API) secara sinkron.
     """
-
-    # Jumlah maksimum token yang dapat ditangani oleh model dalam satu input prompt
-    MAX_CONTEXT_TOKENS = 2048
-
-    # Jumlah maksimum token yang diperbolehkan dari dokumen (chunks) untuk membentuk prompt
-    MAX_CHUNK_TOKENS = 150
-
     def __init__(self):
         """
-        Konstruktor untuk menginisialisasi model LLM dari file .gguf lokal.
-        Memastikan file model tersedia sebelum memuatnya.
+        Konstruktor untuk menginisialisasi client Groq dan konfigurasi.
         """
-        # Tentukan path model GGUF relatif terhadap file ini
-        model_path = os.path.join(
-            os.path.dirname(__file__),
-            "..",
-            "model",
-            "qwen1_5-1_8b-chat-q4_k_m.gguf"
-        )
-
-        # Validasi keberadaan file model
-        if not os.path.exists(model_path):
-            logging.error(f"File model GGUF tidak ditemukan di: {model_path}. Mohon periksa lokasinya.")
-            self.llm = None
+        self.config = AppConfig()
+        if not self.config.GROQ_API_KEY:
+            logging.error("API key tidak ditemukan. Pastikan GROQ_API_KEY telah diatur.")
+            self.client = None
             return
 
         try:
-            # Inisialisasi model LLM dengan konfigurasi context window
-            self.llm = Llama(model_path=model_path, n_ctx=self.MAX_CONTEXT_TOKENS, verbose=False)
-            logging.info(f"Model Llama.cpp berhasil dimuat dengan context window {self.MAX_CONTEXT_TOKENS}. Generator siap.")
+            self.client = Groq(api_key=self.config.GROQ_API_KEY)
+            logging.info("Generator Groq sinkron berhasil diinisialisasi.")
         except Exception as e:
-            logging.error(f"Gagal memuat model Llama.cpp: {e}")
-            self.llm = None
+            logging.error(f"Gagal menginisialisasi Groq client: {e}")
+            self.client = None
 
-    def _create_prompt(self, query, retrieved_chunks):
-        """
-        Membuat prompt input untuk LLM dari query pengguna dan dokumen yang relevan.
-
-        Parameters:
-            query (str): Pertanyaan dari pengguna.
-            retrieved_chunks (List[str]): List dokumen atau paragraf yang relevan.
-
-        Returns:
-            str: Prompt lengkap yang akan dikirim ke model LLM.
-        """
-        # Template dasar untuk sistem prompt
-        prompt_template = (
-            "Anda adalah asisten AI yang ahli dalam Peraturan Daerah Kota Bandung "
-            "tentang Pengelolaan Sampah. Tugas Anda adalah memberikan jawaban yang singkat, "
-            "sopan, dan berbasis fakta dari dokumen yang disediakan.\n\n"
-            "Dokumen terkait:\n"
-            "{chunks}\n\n"
-            "Berdasarkan dokumen di atas, jawab pertanyaan pengguna berikut:\n"
-            "Pertanyaan: {query}\n"
-            "Jawaban:"
+    def _create_prompt_messages(self, query, retrieved_chunks):
+        """Mempersiapkan pesan dalam format yang dibutuhkan oleh API."""
+        context = "\n---\n".join(retrieved_chunks)
+        user_content = (
+            f"Konteks Dokumen:\n"
+            f"-----------------\n"
+            f"{context}\n"
+            f"-----------------\n\n"
+            f"Berdasarkan konteks di atas, jawab pertanyaan ini:\n"
+            f"Pertanyaan: {query}"
         )
 
-        # Bangun konten dokumen yang dibatasi jumlah token-nya
-        chunks_text_list = []
-        current_token_count = 0
-        for chunk in retrieved_chunks:
-            chunk_tokens = len(chunk.split())
-            if current_token_count + chunk_tokens <= self.MAX_CHUNK_TOKENS:
-                chunks_text_list.append(chunk)
-                current_token_count += chunk_tokens
-            else:
-                break  # Hentikan jika melebihi batas
-
-        chunks_text = "\n---\n".join(chunks_text_list)
-        prompt = prompt_template.format(chunks=chunks_text, query=query)
-
-        return prompt
+        return [
+            {"role": "system", "content": self.config.SYSTEM_PROMPT},
+            {"role": "user", "content": user_content}
+        ]
 
     def generate_answer(self, query, retrieved_chunks):
         """
-        Menghasilkan jawaban atas pertanyaan pengguna berdasarkan dokumen yang relevan.
-
-        Parameters:
-            query (str): Pertanyaan dari pengguna.
-            retrieved_chunks (List[str]): Dokumen relevan yang telah diambil dari retriever.
-
-        Returns:
-            str: Jawaban dari model LLM atau pesan kesalahan jika terjadi kegagalan.
+        Menghasilkan jawaban dengan memanggil API Groq secara sinkron.
         """
-        # Validasi awal sebelum memproses prompt
-        if self.llm is None:
-            return "Maaf, generator tidak dapat memuat model LLM lokal."
+        if self.client is None:
+            return "Maaf, generator tidak terhubung ke layanan LLM remote."
 
         if not query.strip():
-            return "Pertanyaan tidak boleh kosong. Mohon masukkan pertanyaan Anda."
+            return "Pertanyaan tidak boleh kosong."
 
         if not retrieved_chunks:
-            return "Maaf, saya tidak dapat menemukan informasi yang relevan dalam dokumen."
+            return "Maaf, tidak ada informasi relevan dalam dokumen untuk menjawab pertanyaan Anda."
 
-        # Bangun prompt dari query dan chunks
-        prompt_content = self._create_prompt(query, retrieved_chunks)
-
-        # Validasi panjang prompt sebelum dikirim
-        if len(prompt_content.split()) > self.MAX_CONTEXT_TOKENS:
-            logging.error("Prompt masih terlalu panjang setelah pemotongan. Silakan kurangi ukuran chunks lebih lanjut.")
-            return "Maaf, prompt yang dihasilkan terlalu panjang untuk model. Silakan coba pertanyaan yang lebih ringkas."
-
-        logging.info("Prompt berhasil dibuat. Menghasilkan jawaban dengan model LLM...")
+        logging.info(f"Membuat prompt untuk pertanyaan: '{query[:50]}...'")
+        messages = self._create_prompt_messages(query, retrieved_chunks)
+        logging.info("Mengirim permintaan ke Groq API...")
 
         try:
-            # Kirim prompt ke model untuk menghasilkan jawaban
-            response = self.llm.create_chat_completion(
-                messages=[
-                    {
-                        "role": "system",
-                        "content": (
-                            "Anda adalah asisten AI yang ahli dalam Peraturan Daerah "
-                            "Kota Bandung tentang Pengelolaan Sampah."
-                        )
-                    },
-                    {
-                        "role": "user",
-                        "content": prompt_content
-                    }
-                ],
-                stop=["Jawaban:", "###"],  # Pemicu untuk menghentikan output
-                max_tokens=256,             # Batas panjang jawaban
-                temperature=0.7             # Kontrol variasi jawaban
+            chat_completion = self.client.chat.completions.create(
+                messages=messages,
+                model=self.config.LLM_MODEL,
+                temperature=self.config.LLM_TEMPERATURE,
+                max_tokens=self.config.LLM_MAX_TOKENS
             )
-
-            return response['choices'][0]['message']['content']
+            response_content = chat_completion.choices[0].message.content
+            logging.info("Respons dari Groq API berhasil diterima.")
+            return response_content
+        except groq.APIError as e:
+            logging.error(f"Groq API Error: {e}")
+            return "Maaf, terjadi kesalahan pada API. Silakan coba lagi."
+        except groq.RateLimitError as e:
+            logging.warning(f"Groq Rate Limit Error: {e}")
+            return "Layanan sedang sibuk. Mohon tunggu sebentar dan coba lagi."
         except Exception as e:
-            logging.error(f"Gagal menghasilkan respons dari model: {e}")
-            return "Maaf, terjadi kesalahan saat menghubungi model LLM lokal."
+            logging.error(f"Gagal mendapatkan respons dari Groq API: {e}")
+            return "Maaf, terjadi kesalahan yang tidak terduga."
+
+class LLMGeneratorAsync:
+    """
+    Kelas untuk menghasilkan jawaban menggunakan model remote (Groq API) secara asinkron.
+    """
+    def __init__(self):
+        self.config = AppConfig()
+        if not self.config.GROQ_API_KEY:
+            logging.error("API key tidak ditemukan. Pastikan GROQ_API_KEY telah diatur.")
+            self.client = None
+            return
+        
+        try:
+            self.client = AsyncGroq(api_key=self.config.GROQ_API_KEY)
+            logging.info("Generator Groq asinkron berhasil diinisialisasi.")
+        except Exception as e:
+            logging.error(f"Gagal menginisialisasi Groq client: {e}")
+            self.client = None
+
+    def _create_prompt_messages(self, query, retrieved_chunks):
+        """Mempersiapkan pesan dalam format yang dibutuhkan oleh API."""
+        # Logika sama seperti versi sinkron
+        context = "\n---\n".join(retrieved_chunks)
+        user_content = (
+            f"Konteks Dokumen:\n"
+            f"-----------------\n"
+            f"{context}\n"
+            f"-----------------\n\n"
+            f"Berdasarkan konteks di atas, jawab pertanyaan ini:\n"
+            f"Pertanyaan: {query}"
+        )
+        return [
+            {"role": "system", "content": self.config.SYSTEM_PROMPT},
+            {"role": "user", "content": user_content}
+        ]
+
+    async def generate_answer(self, query, retrieved_chunks):
+        """
+        Menghasilkan jawaban dengan memanggil API Groq secara asinkron.
+        """
+        if self.client is None:
+            return "Maaf, generator tidak terhubung ke layanan LLM remote."
+
+        if not query.strip():
+            return "Pertanyaan tidak boleh kosong."
+
+        if not retrieved_chunks:
+            return "Maaf, tidak ada informasi relevan dalam dokumen untuk menjawab pertanyaan Anda."
+
+        logging.info(f"Membuat prompt untuk pertanyaan: '{query[:50]}...'")
+        messages = self._create_prompt_messages(query, retrieved_chunks)
+        logging.info("Mengirim permintaan asinkron ke Groq API...")
+
+        try:
+            chat_completion = await self.client.chat.completions.create(
+                messages=messages,
+                model=self.config.LLM_MODEL,
+                temperature=self.config.LLM_TEMPERATURE,
+                max_tokens=self.config.LLM_MAX_TOKENS
+            )
+            response_content = chat_completion.choices[0].message.content
+            logging.info("Respons dari Groq API berhasil diterima.")
+            return response_content
+        except groq.APIError as e:
+            logging.error(f"Groq API Error: {e}")
+            return "Maaf, terjadi kesalahan pada API. Silakan coba lagi."
+        except groq.RateLimitError as e:
+            logging.warning(f"Groq Rate Limit Error: {e}")
+            return "Layanan sedang sibuk. Mohon tunggu sebentar dan coba lagi."
+        except Exception as e:
+            logging.error(f"Gagal mendapatkan respons dari Groq API: {e}")
+            return "Maaf, terjadi kesalahan yang tidak terduga."

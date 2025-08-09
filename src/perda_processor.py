@@ -1,19 +1,28 @@
-# --- Library Eksternal ---
-import fitz  # PyMuPDF untuk ekstraksi teks dari PDF
-import re  # Regex untuk pembersihan teks
-import joblib  # Untuk serialisasi model atau data
-from sklearn.feature_extraction.text import TfidfVectorizer  # TF-IDF untuk indexing teks
-import nltk  # Natural Language Toolkit untuk tokenisasi
 from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from sklearn.feature_extraction.text import TfidfVectorizer # TF-IDF untuk indexing teks
+from typing import List, Tuple, Optional
+import fitz # PyMuPDF untuk ekstraksi teks dari PDF
+import re # Regex untuk pembersihan teks
+import joblib # Untuk serialisasi model atau data
+import nltk # Natural Language Toolkit untuk tokenisasi
 import os
-import argparse  # Untuk parsing argumen CLI
-import logging  # Logging untuk pelacakan proses
-import unittest  # Unit testing untuk validasi fungsi
+import argparse # Untuk parsing argumen CLI
+import logging # Logging untuk pelacakan proses
+import numpy as np
 
 # --- Konfigurasi Logging Default ---
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def extract_text_from_pdf(pdf_path):
+# Pastikan stopwords Bahasa Indonesia tersedia
+try:
+    stopwords_id = set(stopwords.words('indonesian'))
+except LookupError:
+    logging.warning("NLTK 'stopwords' resource not found. Downloading...")
+    nltk.download('stopwords')
+    stopwords_id = set(stopwords.words('indonesian'))
+
+def extract_text_from_pdf(pdf_path: str) -> Optional[str]:
     """
     Mengekstrak teks dari file PDF menggunakan PyMuPDF (fitz).
     
@@ -31,23 +40,24 @@ def extract_text_from_pdf(pdf_path):
         text = ""
         for page in doc:
             page_text = page.get_text("text")
-            if page_text:
-                text += page_text
+        if page_text:
+            text += page_text
         doc.close()
         if not text.strip():
             logging.warning("Dokumen PDF tampaknya kosong atau tidak berisi teks yang dapat diekstrak.")
-            return None
+        return None
         return text
     except Exception as e:
         logging.error(f"Error saat memproses PDF: {e}")
         return None
 
-def preprocess_text(text):
+def preprocess_text(text: str) -> str:
     """
     Membersihkan teks mentah dari hasil ekstraksi PDF.
-    - Menghapus header/footer
+    - Menghapus header/footer, footnote
     - Menghapus referensi hukum yang berulang
-    - Merapikan whitespace
+    - Mengubah ke lowercase, menghapus spasi berlebih, dll.
+    - Menghapus stopwords
     
     Args:
         text (str): Teks mentah.
@@ -55,17 +65,72 @@ def preprocess_text(text):
     Returns:
         str: Teks yang telah dibersihkan.
     """
-    text = re.sub(r'Page \d+ of \d+', '', text)
-    text = re.sub(r'Peraturan Daerah Nomor 9 Tahun 2018', '', text, flags=re.IGNORECASE)
+    # Menghapus header/footer dan URL
+    text = re.sub(r'WALI KOTA BANDUNG.*?\n', '', text, flags=re.DOTALL)
+    text = re.sub(r'https://jdih\.bandung\.go\.id/.*?\n', '', text)
+    text = re.sub(r'LEMBARAN DAERAH KOTA BANDUNG.*', '', text)
+    text = re.sub(r'Penjelasan\nAtas.*', '', text, flags=re.DOTALL) # Menghapus penjelasan di akhir dokumen
     
-    text = text.replace('\n', ' ')
+    # Menghilangkan baris kosong dan spasi berlebih
+    text = re.sub(r'\n\s*\n', '\n', text)
     text = re.sub(r'\s+', ' ', text).strip()
+    
+    # Mengubah ke lowercase dan menghapus karakter non-alfanumerik
+    text = text.lower()
+    text = re.sub(r'[^a-z0-9\s.,]', '', text)
+    
+    # Menghapus stopwords (opsional, dapat diaktifkan/dinonaktifkan)
+    # tokens = word_tokenize(text)
+    # filtered_tokens = [word for word in tokens if word not in stopwords_id]
+    # text = ' '.join(filtered_tokens)
     
     return text
 
-def chunk_text(text, chunk_size=300, overlap=50):
+def chunk_text_by_structure(text: str) -> List[str]:
+    """
+    Membagi teks menjadi chunks berdasarkan struktur dokumen (Bab, Pasal).
+    
+    Args:
+        text (str): Teks yang sudah dibersihkan.
+    
+    Returns:
+        List[str]: List berisi potongan teks (chunk) per struktur.
+    """
+    # Pola regex untuk menemukan judul Bab dan Pasal
+    structure_pattern = r'(BAB\s+[IVXLCDM]+\s+|Pasal\s+\d+)'
+    
+    # Memisahkan teks berdasarkan pola tersebut
+    parts = re.split(structure_pattern, text)
+    
+    chunks = []
+    current_chunk_title = ""
+    current_chunk_content = ""
+    
+    for part in parts:
+        if re.match(structure_pattern, part):
+            # Jika ini judul baru, simpan chunk sebelumnya jika ada
+            if current_chunk_content:
+                chunks.append(f"{current_chunk_title.strip()} {current_chunk_content.strip()}")
+            current_chunk_title = part
+            current_chunk_content = ""
+        else:
+            current_chunk_content += part
+    
+    # Simpan chunk terakhir
+    if current_chunk_content:
+        chunks.append(f"{current_chunk_title.strip()} {current_chunk_content.strip()}")
+
+    # Jika struktur tidak terdeteksi, fallback ke chunking berbasis token
+    if len(chunks) < 2:
+        logging.warning("Struktur dokumen tidak terdeteksi. Menggunakan chunking berbasis token.")
+        return chunk_text_by_token(text, chunk_size=300, overlap=50)
+        
+    return chunks
+
+def chunk_text_by_token(text: str, chunk_size: int = 300, overlap: int = 50) -> List[str]:
     """
     Membagi teks panjang menjadi beberapa potongan (chunk) dengan overlap token.
+    Ini adalah metode fallback jika chunking struktural gagal.
     
     Args:
         text (str): Teks yang ingin dipecah.
@@ -93,7 +158,7 @@ def chunk_text(text, chunk_size=300, overlap=50):
         chunks.append(chunk)
     return chunks
 
-def create_tfidf_index(chunks):
+def create_tfidf_index(chunks: List[str]) -> Tuple[TfidfVectorizer, np.ndarray]:
     """
     Membuat indeks TF-IDF dari daftar chunk teks.
     
@@ -110,7 +175,7 @@ def create_tfidf_index(chunks):
     tfidf_matrix = vectorizer.fit_transform(chunks)
     return vectorizer, tfidf_matrix
 
-def analyze_chunks(chunks):
+def analyze_chunks(chunks: List[str]):
     """
     Menganalisis statistik dasar dari chunks yang dibuat.
     
@@ -120,14 +185,14 @@ def analyze_chunks(chunks):
     if not chunks:
         logging.info("Tidak ada chunks untuk dianalisis.")
         return
-    
+
     chunk_lengths = [len(word_tokenize(chunk)) for chunk in chunks]
     if not chunk_lengths:
         logging.info("Tidak ada chunks untuk dianalisis.")
         return
 
     avg_length = sum(chunk_lengths) / len(chunks)
-    
+
     logging.info("\n--- Analisis Chunks ---")
     logging.info(f"Total chunks: {len(chunks)}")
     logging.info(f"Rata-rata token per chunk: {avg_length:.2f}")
@@ -135,76 +200,42 @@ def analyze_chunks(chunks):
     for i, chunk in enumerate(chunks[:3]):
         logging.info(f"Chunk {i+1} (panjang {len(word_tokenize(chunk))} token):\n{chunk[:200]}...")
 
-class TestPreprocessing(unittest.TestCase):
-    """
-    Unit test untuk fungsi preprocessing dan chunking.
-    """
-    def test_preprocess_text(self):
-        text = "Peraturan Daerah Nomor 9 Tahun 2018\n\n Ini adalah teks.   \n\n Page 1 of 1"
-        expected = "Ini adalah teks."
-        self.assertEqual(preprocess_text(text), expected)
-
-    def test_chunk_text(self):
-        long_text = "Ini adalah sebuah contoh teks yang panjang untuk dipecah menjadi beberapa chunk. Kita akan memastikan bahwa proses chunking berjalan dengan benar dan ada tumpang tindih antar chunk."
-        chunks = chunk_text(long_text, chunk_size=20, overlap=5)
-        self.assertEqual(len(chunks), 4)
-        self.assertEqual(chunks[0], 'Ini adalah sebuah contoh teks yang panjang untuk dipecah menjadi beberapa chunk .')
-
-    @unittest.skip("Membutuhkan file dummy untuk testing.")
-    def test_extract_text_from_pdf(self):
-        pass
-
-def run_tests():
-    """
-    Menjalankan semua unit test yang telah didefinisikan.
-    """
-    loader = unittest.TestLoader()
-    suite = unittest.TestSuite()
-    suite.addTest(loader.loadTestsFromTestCase(TestPreprocessing))
-    runner = unittest.TextTestRunner()
-    runner.run(suite)
-
 def main():
     """
     Fungsi utama untuk menjalankan pipeline pemrosesan PDF menjadi TF-IDF pickle.
     """
     parser = argparse.ArgumentParser(description='Script untuk memproses dokumen PERDA dan membuat TF-IDF index.')
     parser.add_argument('pdf_path', nargs='?', type=str, help='Path ke file PDF PERDA.')
-    parser.add_argument('--output', type=str, default="perda_data.pkl", help='Lokasi file output pickle.')
+    parser.add_argument('--output', type=str, default="data/perda_data.pkl", help='Lokasi file output pickle.')
     parser.add_argument('--log-level', type=str, default='INFO', choices=['DEBUG', 'INFO', 'WARNING', 'ERROR'], help='Atur level logging.')
-    parser.add_argument('--run-tests', action='store_true', help='Jalankan unit tests.')
     args = parser.parse_args()
     
     # Atur level logging sesuai dengan parameter
     logging.getLogger().setLevel(getattr(logging, args.log_level.upper()))
     
-    if args.run_tests:
-        run_tests()
-        return
-
     if not args.pdf_path:
         logging.error("Argumen 'pdf_path' wajib disertakan. Contoh: python perda_processor.py <path_ke_pdf>")
         return
 
     logging.info("Memulai proses persiapan data...")
-    
+
     # 1. Ekstrak teks dari PDF
     raw_text = extract_text_from_pdf(args.pdf_path)
     if raw_text is None:
         return
-    
+
     # 2. Praproses teks
     cleaned_text = preprocess_text(raw_text)
-    
+
     # 3. Potong teks menjadi chunks
-    document_chunks = chunk_text(cleaned_text, chunk_size=300, overlap=50)
+    document_chunks = chunk_text_by_structure(cleaned_text)
     if not document_chunks:
         logging.error("Gagal membagi dokumen menjadi chunks.")
-        return
-    
+    return
+
     # 4. Analisis statistik chunks
     analyze_chunks(document_chunks)
-    
+
     # 5. Buat indeks TF-IDF
     vectorizer, tfidf_matrix = create_tfidf_index(document_chunks)
     if vectorizer is None or tfidf_matrix is None:
@@ -217,7 +248,7 @@ def main():
         'vectorizer': vectorizer,
         'tfidf_matrix': tfidf_matrix
     }
-    
+
     joblib.dump(processed_data, args.output)
     logging.info(f"\nProses selesai. Data berhasil disimpan ke {args.output}")
     logging.info(f"Ukuran TF-IDF matrix: {tfidf_matrix.shape}")

@@ -9,21 +9,24 @@ logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s -
 
 # Kamus konfigurasi retriever (sama seperti sebelumnya)
 RETRIEVER_MODES = {
-    "Baseline (TF-IDF Saja)": {
-        "use_reranker": False, "top_k": 5, "initial_k": 5
-    },
-    # "Reranker (Seimbang)": {
-    #     "use_reranker": True, "top_k": 5, "initial_k": 50
+    # "Baseline (TF-IDF Saja)": {
+    #     "use_reranker": False, "top_k": 5, "initial_k": 5
     # },
+    "Reranker (Seimbang)": {
+        "use_reranker": True, "top_k": 5, "initial_k": 50
+    },
     # "Reranker (Akurasi Tinggi)": {
     #     "use_reranker": True, "top_k": 5, "initial_k": 200
+    # },
+    # "Reranker (Akurasi Sangat Tinggi)": {
+    #     "use_reranker": True, "top_k": 5, "initial_k": 500
     # },
     # "Reranker (Cepat)": {
     #     "use_reranker": True, "top_k": 3, "initial_k": 20
     # }
 }
 
-OUTPUT_FILE = "data/generated_answers.json"
+OUTPUT_FILE = "data/new_generated_answers_reranker_5_50.json"
 
 def generate_all_answers():
     """
@@ -40,10 +43,10 @@ def generate_all_answers():
 
     print("Memuat dataset evaluasi...")
     try:
-        with open('data/evaluation.json', 'r', encoding='utf-8') as f:
+        with open('data/new_evaluation.json', 'r', encoding='utf-8') as f:
             evaluation_data = json.load(f)
     except FileNotFoundError:
-        print("File 'data/evaluation.json' tidak ditemukan.")
+        print("File 'data/new_evaluation.json' tidak ditemukan.")
         return
 
     all_generated_answers = {}
@@ -69,7 +72,15 @@ def generate_all_answers():
                 initial_k=config['initial_k'],
                 use_reranker=config['use_reranker']
             )
-            retrieved_chunks = [c[0] for c in retrieved_chunks_with_scores]
+            # retrieved_chunks = [c[0] for c in retrieved_chunks_with_scores]
+
+            sanitized_chunks_with_scores = [
+                (chunk, float(score)) for chunk, score in retrieved_chunks_with_scores
+            ]
+
+            # Use the sanitized chunks for generation
+            retrieved_chunks = [c[0] for c in sanitized_chunks_with_scores]
+
 
             # 2. Generate answer
             generated_answer = generator.generate_answer(question, retrieved_chunks)
@@ -77,13 +88,14 @@ def generate_all_answers():
             mode_answers.append({
                 "question": question,
                 "generated_answer": generated_answer,
-                "ground_truth": item["ground_truth"] # Sertakan ground truth untuk kemudahan
+                "ground_truth": item["ground_truth"], # Sertakan ground truth untuk kemudahan
+                "retrieved_chunks_with_scores": sanitized_chunks_with_scores # Use the sanitized list
             })
             
             print(" Selesai.")
             
             # Jeda waktu konservatif untuk menghindari rate limit
-            time.sleep(15)
+            time.sleep(6)
 
         all_generated_answers[mode_name] = mode_answers
 
